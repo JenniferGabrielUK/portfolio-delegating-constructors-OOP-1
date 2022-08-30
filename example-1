@@ -1,0 +1,34 @@
+// portfolio-delegating-constructors-OOP-1.cpp : This file contains the 'main' function. Program execution begins and ends there.
+#include <iostream>
+#include <string>
+
+class Player {
+private:
+	std::string name;
+	double health;
+	int xp;
+public:
+	//overloaded constructors
+	Player();
+	Player(std::string name);
+	Player(std::string, double, int);
+	~Player();
+};
+
+//Delegating Constructors - we delegate the constructors to the most overloaded constructor in this case the 3args constructor
+
+Player::Player() : Player("Unknown", 1.0, 1) { std::cout << "No args-constructor being called after delegating to the 3 args-constructor." << std::endl; }
+
+Player::Player(std::string name) : Player(name, 1.0, 1) { std::cout << "Single args constructor." << std::endl; }
+
+Player:: Player(std::string name, double health, int xp) : name{ name }, health{ health }, xp{ xp } { std::cout << "Delegated Overloaded 3 args constructor being called." << std::endl; }
+
+Player::~Player() { std::cout << "Destructor being called for " << name << std::endl; }
+
+int main()
+{
+	Player jenny;
+	Player elizabeth{ "Liz", 10.01, 12 };
+	Player gabriel{ "Gabriel" };
+	return 0;
+}
